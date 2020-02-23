@@ -1,0 +1,214 @@
+/* Remove the navbar's default margin-bottom and rounded borders */
+
+#page {
+    margin-bottom: 61px;
+}
+
+.split {
+    height: 88%;
+    width: 50%;
+    position: fixed;
+    z-index: 1;
+    top: 5%;
+    overflow-x: hidden;
+    padding-top: 20px;
+}
+
+.left {
+    left: 0;
+    background-color: white;
+}
+
+.right {
+    right: 0;
+    background-color: white;
+}
+
+.centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.navbar {
+    margin-bottom: 0;
+    border-radius: 0;
+    border: none;
+}
+
+a {
+    color: black;
+}
+
+ul a :active {
+    color: rgb(52, 204, 255);
+}
+
+
+/* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+
+.row.content {
+    height: 450px;
+}
+
+
+/* Set background color and 100% height */
+
+.sidenav {
+    padding-top: 20px;
+    background-color: #f1f1f1;
+    height: 100%;
+}
+
+
+/* Format images */
+
+.center {
+    padding-top: 12%;
+}
+
+
+/* Set black background color, white text and some padding */
+
+footer {
+    background-color: white;
+    color: slategray;
+    padding: 15px;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+}
+
+.divdown {
+    position: relative;
+    top: 50;
+}
+
+
+/* General sizing */
+
+ul.dropdown-lr {
+    width: 300px;
+}
+
+body {
+    background-color: white;
+}
+
+.img {
+    overflow: hidden;
+}
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.btn_1 {
+    border: 2px solid black;
+    border-radius: 10px;
+    background-color: white;
+    color: black;
+    padding: 14px 28px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background: silver;
+}
+
+a:active {
+    color: #5A7E35;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    color: black;
+    font-size: 25px;
+    text-align: left;
+}
+
+th {
+    padding: 5px;
+    background-color: white;
+    color: black;
+}
+
+tr {
+    padding: 5px;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2
+}
+
+
+/* The Modal (background) */
+
+.modal {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
+}
+
+
+/* Modal Content/Box */
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    /* Could be more or less, depending on screen size */
+}
+
+
+/* The Close Button */
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+/* On small screens, set height to 'auto' for sidenav and grid */
+
+@media screen and (max-width: 767px) {
+    .sidenav {
+        height: auto;
+        padding: 15px;
+    }
+    .row.content {
+        height: auto;
+    }
+}
