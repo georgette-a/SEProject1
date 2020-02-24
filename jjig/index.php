@@ -1,7 +1,8 @@
 <?php
-include('../login/login.php'); // Includes Login Script
+include('login.php'); // Includes Login Script
+include('insert.php'); // Includes Login Script
 if(isset($_SESSION['login_user'])){
-header("location: view/profile.php"); // Redirecting To Profile Page
+header("location: profile.php"); // Redirecting To Profile Page
 }
 ?>
 
