@@ -17,7 +17,6 @@ header("location:index.php"); // Redirecting To Home Page
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </head>
-
 <body>
 
 <nav class="navbar" style="background-color: white;">
@@ -38,24 +37,21 @@ header("location:index.php"); // Redirecting To Home Page
         <li><a href="logout.php">Log Out</a></li>
        
   </div>
-</nav>
-
 
 <div class = "split left">
 <div class="centered">
   <h1 id="welcome">Welcome <?php echo $login_session; ?></h1>
   <h4 class="text-muted"><i>What would you like to do?</i></h4><br>
+  <!-- Buttons --->
+
   <button type="button" class="btn_1 my-4 btn-block" id="myBtn">Set Monthly Budget</button>
-  <br>
+  <br><br>
   <button type="button" class="btn_1 my-4 btn-block" id="myBtn1">Log Expense</button>
-  <br>
-  
-  <form class="text-center border border-light p-5" method="POST" action="expense.php">
+<br><br>
+   <form class="text-center border border-light p-5" method="POST" action="expense.php">
    <button type="submit" name="reset" class="btn_1 my-4 btn-block" id="rstBtn1">RESET</button>
   </form>
   
-  <br>
-  <a href="graphs.php"><button type="button" class="btn_1 my-4 btn-block" id="rstBtn1">View Graph</button></a>
 
 <!-- Modal -->
 
@@ -98,7 +94,7 @@ header("location:index.php"); // Redirecting To Home Page
     <input type="text" id="item" name="item" class="form-control mb-8" placeholder="Item">
 <br>
     <!-- Cost -->
-    <input type="number" step="0.01" min="0" id="budget" name="cost" class="form-control mb-8" placeholder="Cost of item">
+    <input type="number" id="budget" name="cost" class="form-control mb-8" placeholder="Cost of item">
 <br>
 
   
@@ -160,25 +156,33 @@ window.onclick = function(event) {
 
 <div class ="split right">
   <div class= "centered">
-  <div> 
-    <?php ?>  
-  </div>
     <table>
       <tr>
+        <th>ExpenseId</th>
         <th>Item</th>
         <th>Cost</th>
       </tr>
       <?php
       require("config.php");
-    
-      $sql = "SELECT Amount,item FROM expense where email = '$usr_mail'";
+    /**CHANGE MADE!!! */
+      $sql = "SELECT ExpID, Amount,item FROM expense where email = '$usr_mail'";
       $result = $conn->query($sql);
+      $new_balance;
+      //$budd = 1000;
+      //$balance_1 = 1000;
+
       if ($result->num_rows > 0) {
         // output data of each row
-    
         while($row = $result->fetch_assoc()) {
-          echo "</td><td>" . $row["item"] . "</td><td>". $row["Amount"] . "</td></tr>";
+          
+          echo "<tr><td>" . $row["ExpID"]. "</td><td>" . $row["item"] . "</td><td>". $row["Amount"] . "</td></tr>";
+          $new_balance = $balance - $row["Amount"];
+          $balance = $new_balance;
+
+          $sqlupdate = "UPDATE budget SET  balance = '$balance' WHERE email= '$usr_mail'";
+          $updatebalance = mysqli_query($conn, $sqlupdate);
         }
+        
         echo "</table>";
       } 
       else 
@@ -188,7 +192,9 @@ window.onclick = function(event) {
       $conn->close();
       ?>
       </table>
-      <h5>Total Is: <?php echo $sum; ?></h1>
+      <br>
+      <h3>Your total budget is: GHS <?php /* CHANGE MADE */ echo $budd; ?></h3>
+      <h3>Remaining Balance: GHS <?php /* CHANGE MADE */ echo $balance; ?></h3>
    
     </div>
   </div>

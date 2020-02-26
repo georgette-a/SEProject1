@@ -4,8 +4,6 @@ require('budget.php');
 require('config.php');
 include('login.php');
 
-$user_email = $_SESSION['login_user'];
-
 if(!isset($_SESSION['login_user'])){
 header("location: index.php"); // Redirecting To Home Page
 }
@@ -41,15 +39,9 @@ else{
     echo "failed";
 }
 
-if(isset($_POST['reset'])){
 
-    $query = "DELETE FROM `expense` WHERE `email` = '$user_email'";
-    if (mysqli_query($conn, $query)) {
-        header("location: profile.php");
-    } else {
-        echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-        mysqli_close($conn);
-    }
-}
+
+
+
 
 ?>

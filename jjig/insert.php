@@ -28,14 +28,16 @@ $cpass = $_POST['cpassword'];
 
 if ($pass = $cpass) {
     $sQuery = "SELECT email from User where email='$mail' LIMIT 1";
-$sql = "INSERT INTO User (fname, lname, email, password)
-VALUES (?, ?, ?, ?)";
+    $sql = "INSERT INTO User (fname, lname, email, password)
+    VALUES (?, ?, ?, ?)";
+    
+    $sql = "INSERT INTO User (fname, lname, email, password)
+    VALUES ('$first', '$last', '$mail', '$pass')";
 
+    $sql2 = "INSERT INTO budget ( email,  amount, remainder)
+VALUES ( '$mail', '0', '0')";
 
-$sql = "INSERT INTO User (fname, lname, email, password)
-VALUES ('$first', '$last', '$mail', '$pass')";
-
-if (mysqli_query($conn, $sql)) {
+if (mysqli_query($conn, $sql) && mysqli_query($conn, $sql2)) {
     header("location:profile.php");
 } else {
     echo "Error: " . $sql . "<br>" . mysqli_error($conn);
