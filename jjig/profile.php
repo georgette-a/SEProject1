@@ -17,6 +17,7 @@ header("location:index.php"); // Redirecting To Home Page
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </head>
+
 <body>
 
 <nav class="navbar" style="background-color: white;">
@@ -34,18 +35,27 @@ header("location:index.php"); // Redirecting To Home Page
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
 		<li class="active"><a href="profile.php">Home</a></li>
-        <li><a href="slogout.php">Log Out</a></li>
+        <li><a href="logout.php">Log Out</a></li>
        
   </div>
+</nav>
+
 
 <div class = "split left">
 <div class="centered">
   <h1 id="welcome">Welcome <?php echo $login_session; ?></h1>
   <h4 class="text-muted"><i>What would you like to do?</i></h4><br>
   <button type="button" class="btn_1 my-4 btn-block" id="myBtn">Set Monthly Budget</button>
-  <br><br>
-  <button type="button" class="btn_1 my-4 btn-block" id="myBtn2">Log Expense</button>
+  <br>
+  <button type="button" class="btn_1 my-4 btn-block" id="myBtn1">Log Expense</button>
+  <br>
   
+  <form class="text-center border border-light p-5" method="POST" action="expense.php">
+   <button type="submit" name="reset" class="btn_1 my-4 btn-block" id="rstBtn1">RESET</button>
+  </form>
+  
+  <br>
+  <a href="graphs.php"><button type="button" class="btn_1 my-4 btn-block" id="rstBtn1">View Graph</button></a>
 
 <!-- Modal -->
 
@@ -88,7 +98,7 @@ header("location:index.php"); // Redirecting To Home Page
     <input type="text" id="item" name="item" class="form-control mb-8" placeholder="Item">
 <br>
     <!-- Cost -->
-    <input type="number" id="budget" name="cost" class="form-control mb-8" placeholder="Cost of item">
+    <input type="number" step="0.01" min="0" id="budget" name="cost" class="form-control mb-8" placeholder="Cost of item">
 <br>
 
   
@@ -109,7 +119,7 @@ var modal2 = document.getElementById("myModal2");
 
 // Get the button that opens the modal
 var btn = document.getElementById("myBtn");
-var btn2 = document.getElementById("myBtn2");
+var btn2 = document.getElementById("myBtn1");
 
 // Get the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];
@@ -118,9 +128,10 @@ var span = document.getElementsByClassName("close")[0];
 btn.onclick = function() {
   modal.style.display = "block";
 }
-btn.onclick = function() {
+btn2.onclick = function() {
   modal2.style.display = "block";
 }
+
 // When the user clicks on <span> (x), close the modal
 span.onclick = function() {
   modal.style.display = "none";
@@ -136,7 +147,7 @@ window.onclick = function(event) {
   }
 }
 window.onclick = function(event) {
-  if (event.target == modal) {
+  if (event.target == modal2) {
     modal2.style.display = "none";
   }
 }
@@ -149,22 +160,24 @@ window.onclick = function(event) {
 
 <div class ="split right">
   <div class= "centered">
+  <div> 
+    <?php ?>  
+  </div>
     <table>
       <tr>
-        <th>ExpenseId</th>
         <th>Item</th>
         <th>Cost</th>
       </tr>
       <?php
       require("config.php");
     
-      $sql = "SELECT ExpID, Amount,item FROM expense where email = '$usr_mail'";
+      $sql = "SELECT Amount,item FROM expense where email = '$usr_mail'";
       $result = $conn->query($sql);
       if ($result->num_rows > 0) {
         // output data of each row
     
         while($row = $result->fetch_assoc()) {
-          echo "<tr><td>" . $row["ExpID"]. "</td><td>" . $row["item"] . "</td><td>". $row["Amount"] . "</td></tr>";
+          echo "</td><td>" . $row["item"] . "</td><td>". $row["Amount"] . "</td></tr>";
         }
         echo "</table>";
       } 
